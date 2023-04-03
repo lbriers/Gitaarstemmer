@@ -1,4 +1,4 @@
-TODO:
-lessen nakijken
+TODO:	
+lessen nakijken;	
 uitzoeken analyseren van geluid
 
