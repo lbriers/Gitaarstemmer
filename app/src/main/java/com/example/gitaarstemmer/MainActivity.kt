@@ -12,12 +12,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        createFragment()
+
         setContentView(binding.root)
+    }
 
-        //binding test
-        binding.button.setOnClickListener { view ->
-            Snackbar.make(view, "Yippie!", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+    fun createFragment() {
+        val welcomeScreenFragment = WelcomeScreenFragment()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, welcomeScreenFragment)
+            commit()
         }
-
     }
 }
