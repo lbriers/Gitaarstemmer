@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.fragment.app.Fragment
 import com.example.gitaarstemmer.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,20 +16,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        createFragment()
+        openFragment(StemmerFragment())
         createMenu()
 
         setContentView(binding.root)
     }
 
-    // begint de eerste fragment
-    fun createFragment() {
-        val welcomeScreenFragment = WelcomeScreenFragment()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragmentContainer, welcomeScreenFragment)
-            commit()
-        }
-    }
     fun createMenu(){
         menuBarToggle = ActionBarDrawerToggle(this, binding.drawerLayout, R.string.menu_open, R.string.menu_close)
         binding.drawerLayout.addDrawerListener(menuBarToggle)
@@ -40,7 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.menuPony -> doStuff()
+                // TODO: wisselen van fragmenten via menu
+                R.id.menuTuner -> openFragment(StemmerFragment())
+                R.id.menuOpgeslagen -> openFragment(OpgeslagenStemmingenFragment())
+                R.id.menuAanmaken -> openFragment(MaakStemmingenFragment())
                 // ...
             }
             true
@@ -48,15 +43,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // opent het menu wanneer op de knop wordt gedrukt
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // we need to do this to respond correctly to clicks on menu items, otherwise it won't be caught
+        // opent het menu wanneer op de knop wordt gedrukt
         if(menuBarToggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
-    //FIXME: delete
-    fun doStuff(){}
+    // opent een fragment
+    fun openFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, fragment)
+            commit()
+        }
+    }
 }

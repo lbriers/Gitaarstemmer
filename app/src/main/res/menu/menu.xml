@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuPony"
-        android:title="My Little Pony" />
+        android:id="@+id/menuTuner"
+        android:title="Tuner" />
+    <item
+        android:id="@+id/menuOpgeslagen"
+        android:title="Opgeslagen stemmingen" />
+    <item
+        android:id="@+id/menuAanmaken"
+        android:title="Stemmingen aanmaken" />
 </menu>
