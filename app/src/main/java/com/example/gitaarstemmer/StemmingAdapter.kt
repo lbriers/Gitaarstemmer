@@ -1,18 +1,17 @@
 package com.example.gitaarstemmer
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.TextView
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gitaarstemmer.databinding.ActivityMainBinding
 
-class StemmingAdapter(val items: MutableList<Stemming>) :
+class StemmingAdapter(
+    val items: MutableList<Stemming>,
+    val fragment: OpgeslagenStemmingenFragment
+) :
     RecyclerView.Adapter<StemmingAdapter.TodoViewHolder>() {
 
     inner class TodoViewHolder(currentItemView: View) : RecyclerView.ViewHolder(currentItemView)
@@ -31,13 +30,18 @@ class StemmingAdapter(val items: MutableList<Stemming>) :
             findViewById<TextView>(R.id.txtStemmingTitle).text = currentTodoItem.title
             // delete knop
             findViewById<Button>(R.id.buttonDelete).setOnClickListener {
-                items.removeAt(position)
-                notifyDataSetChanged() //FIXME: notifyItemRemoved(position) zorgt voor crash
+                fragment.deleteStemming(position) // TODO: vragen of juist is
             }
             // laad knop
             findViewById<Button>(R.id.buttonLaad).setOnClickListener {
-                //TODO: laadknop
+                fragment.selectStemming(position)
             }
+            if(items[position].selected){
+                this.setBackgroundColor(Color.LTGRAY)
+            } else {
+                setBackgroundColor(Color.WHITE)
+            }
+
         }
     }
 

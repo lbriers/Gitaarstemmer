@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Gitaarstemmer</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Menu -->
     <string name="menu_open">Open Menu</string>
     <string name="menu_close">Close Menu</string>
+    <!-- Delete Alert -->
+    <string name="alert_title">Stemming Verwijderen</string>
+    <string name="alert_message">Bent u zeker?</string>
+    <string name="alert_positive">Ja</string>
+    <string name="alert_negative">Annuleer</string>
+
 </resources>

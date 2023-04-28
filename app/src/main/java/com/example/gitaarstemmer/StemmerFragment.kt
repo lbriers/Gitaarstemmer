@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.gitaarstemmer.databinding.FragmentStemmerBinding
-import com.google.android.material.snackbar.Snackbar
 
 
 class StemmerFragment : Fragment() {
@@ -20,7 +20,7 @@ class StemmerFragment : Fragment() {
         binding = FragmentStemmerBinding.inflate(layoutInflater)
 
         binding.button.setOnClickListener { view ->
-            Snackbar.make(view, "Yippie!", Snackbar.LENGTH_LONG).setAction("Action", null).show()
+            Toast.makeText(context, "Yippie!", Toast.LENGTH_LONG).show()
         }
 
         return binding.root

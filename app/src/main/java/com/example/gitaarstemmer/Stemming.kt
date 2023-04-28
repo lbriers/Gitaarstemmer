@@ -1,4 +1,4 @@
 package com.example.gitaarstemmer
 
-class Stemming(val title: String) {
+class Stemming(val title: String, var selected: Boolean) {
 }
