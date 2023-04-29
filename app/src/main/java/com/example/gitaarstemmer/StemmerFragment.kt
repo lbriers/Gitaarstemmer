@@ -19,10 +19,6 @@ class StemmerFragment : Fragment() {
     ): View? {
         binding = FragmentStemmerBinding.inflate(layoutInflater)
 
-        binding.button.setOnClickListener { view ->
-            Toast.makeText(context, "Yippie!", Toast.LENGTH_LONG).show()
-        }
-
         return binding.root
     }
 

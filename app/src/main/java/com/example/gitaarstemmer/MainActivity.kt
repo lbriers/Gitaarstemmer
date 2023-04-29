@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        openFragment(stemmerFragment)
+        supportFragmentManager.beginTransaction().apply {
+            //kan niet met openFragment() door de terug knop
+            replace(R.id.fragmentContainer, stemmerFragment)
+            commit()
+        }
         createMenu()
 
         setContentView(binding.root)
@@ -65,6 +69,7 @@ class MainActivity : AppCompatActivity() {
     private fun openFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragmentContainer, fragment)
+            addToBackStack(null) // terug knop
             commit()
         }
     }

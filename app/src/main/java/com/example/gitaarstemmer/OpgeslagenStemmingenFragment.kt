@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gitaarstemmer.databinding.FragmentOpgeslagenStemmingenBinding
 
@@ -49,7 +50,7 @@ class OpgeslagenStemmingenFragment : Fragment() {
                 adapter.notifyItemRangeChanged(position, adapter.itemCount - position)
                 dialog.cancel()
             })
-        builder.setNegativeButton( // nee knop
+        builder.setNegativeButton( // annuleer knop
             R.string.alert_negative,
             DialogInterface.OnClickListener { dialog, which ->
                 dialog.cancel()
@@ -59,7 +60,7 @@ class OpgeslagenStemmingenFragment : Fragment() {
     }
 
     fun selectStemming(position: Int) {
-        if (selectedStemming >= 0) {
+        if (selectedStemming >= 0) { // -1 is nog niks geselecteerd
             stemmingenLijst[selectedStemming].selected = false
             adapter.notifyItemChanged(selectedStemming)
         }

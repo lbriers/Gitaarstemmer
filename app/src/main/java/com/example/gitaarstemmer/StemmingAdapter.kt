@@ -36,7 +36,7 @@ class StemmingAdapter(
             findViewById<Button>(R.id.buttonLaad).setOnClickListener {
                 fragment.selectStemming(position)
             }
-            if(items[position].selected){
+            if (items[position].selected) {
                 this.setBackgroundColor(Color.LTGRAY)
             } else {
                 setBackgroundColor(Color.WHITE)
