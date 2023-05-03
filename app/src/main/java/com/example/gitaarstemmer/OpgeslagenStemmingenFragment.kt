@@ -7,20 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gitaarstemmer.databinding.FragmentOpgeslagenStemmingenBinding
 
-class OpgeslagenStemmingenFragment : Fragment() {
+class OpgeslagenStemmingenFragment(
+    var stemmingenLijst: ArrayList<Stemming>,
+    var selectedStemming: Int) : Fragment() {
 
     private lateinit var binding: FragmentOpgeslagenStemmingenBinding
     private lateinit var adapter: StemmingAdapter
-    private var stemmingenLijst: ArrayList<Stemming> = arrayListOf<Stemming>(
-        Stemming("test1", false),
-        Stemming("test2", false),
-        Stemming("test3", false)
-    )
-    private var selectedStemming: Int = -1 // -1 => niks geselecteerd
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +30,7 @@ class OpgeslagenStemmingenFragment : Fragment() {
         return binding.root
     }
 
-    public fun deleteStemming(position: Int) {
+    fun deleteStemming(position: Int) {
         var builder = AlertDialog.Builder(activity) // bevestigings scherm
         builder.setTitle(R.string.alert_title)
         builder.setMessage(R.string.alert_message)

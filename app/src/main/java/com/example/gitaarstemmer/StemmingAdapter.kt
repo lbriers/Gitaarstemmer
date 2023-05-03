@@ -28,9 +28,15 @@ class StemmingAdapter(
         holder.itemView.apply {
             // titel
             findViewById<TextView>(R.id.txtStemmingTitle).text = currentTodoItem.title
+            // noten
+            var notenTxt = ""
+            for (i in currentTodoItem.noten) {
+                notenTxt += "$i "
+            }
+            findViewById<TextView>(R.id.txtStemmingNoten).text = notenTxt
             // delete knop
             findViewById<Button>(R.id.buttonDelete).setOnClickListener {
-                fragment.deleteStemming(position) // TODO: vragen of juist is
+                fragment.deleteStemming(position)
             }
             // laad knop
             findViewById<Button>(R.id.buttonLaad).setOnClickListener {

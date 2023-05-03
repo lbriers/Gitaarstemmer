@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">Gitaarstemmer</string>
     <!-- Menu -->
-    <string name="menu_open">Open Menu</string>
-    <string name="menu_close">Close Menu</string>
-    <!-- Delete Alert -->
+    <string name="menu_open">Open menu</string>
+    <string name="menu_close">Sluit menu</string>
+    <!-- Opgeslagen stemmingen fragment -->
     <string name="alert_title">Stemming Verwijderen</string>
     <string name="alert_message">Bent u zeker?</string>
     <string name="alert_positive">Ja</string>
     <string name="alert_negative">Annuleer</string>
+    <!-- Maak stemmingen fragment-->
+    <string name="input_hint">Titel</string>
+    <string name="geen_titel_waarschuwing">Geef eerst een titel in</string>
+    <string name="succesful_save">Stemming is opgeslagen</string>
 
 </resources>

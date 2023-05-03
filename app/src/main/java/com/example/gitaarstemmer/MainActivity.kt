@@ -13,10 +13,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var menuBarToggle: ActionBarDrawerToggle
 
+    //stemmingenlijst
+    //TODO: vragen of dat public mag zijn
+    private var selectedStemming: Int = -1 // -1 => niks geselecteerd
+    private var stemmingenLijst: ArrayList<Stemming> = arrayListOf<Stemming>(
+        Stemming(
+            "Standaard",
+            false,
+            arrayOf(Noot.E, Noot.A, Noot.D, Noot.G, Noot.B, Noot.E)
+        )
+    )
+
     // fragments
     private var stemmerFragment = StemmerFragment()
-    private var opgeslagenStemmingenFragment = OpgeslagenStemmingenFragment()
-    private var maakStemmingenFragment = MaakStemmingenFragment()
+    private var opgeslagenStemmingenFragment =
+        OpgeslagenStemmingenFragment(stemmingenLijst, selectedStemming)
+    private var maakStemmingenFragment = MaakStemmingenFragment(stemmingenLijst)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,4 +86,5 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     }
+
 }
