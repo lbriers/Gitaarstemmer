@@ -12,5 +12,7 @@
     <string name="input_hint">Titel</string>
     <string name="geen_titel_waarschuwing">Geef eerst een titel in</string>
     <string name="succesful_save">Stemming is opgeslagen</string>
+    <!-- File repository-->
+    <string name="bestandsnaam">stemmingen.txt</string>
 
 </resources>

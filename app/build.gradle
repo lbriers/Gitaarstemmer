@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    // serialization
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.8.21'
 }
 
 android {
@@ -63,5 +65,8 @@ dependencies {
 
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    //serialization
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'
 
 }

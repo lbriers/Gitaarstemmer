@@ -10,17 +10,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gitaarstemmer.databinding.FragmentOpgeslagenStemmingenBinding
 
-class OpgeslagenStemmingenFragment(
-    var stemmingenLijst: ArrayList<Stemming>,
-    var selectedStemming: Int) : Fragment() {
+class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var selectedStemming: Int) : Fragment() {
 
     private lateinit var binding: FragmentOpgeslagenStemmingenBinding
     private lateinit var adapter: StemmingAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentOpgeslagenStemmingenBinding.inflate(layoutInflater)
 
         adapter = StemmingAdapter(stemmingenLijst, this)
@@ -31,10 +26,12 @@ class OpgeslagenStemmingenFragment(
     }
 
     fun deleteStemming(position: Int) {
-        var builder = AlertDialog.Builder(activity) // bevestigings scherm
+        // bevestigings scherm
+        var builder = AlertDialog.Builder(activity)
         builder.setTitle(R.string.alert_title)
         builder.setMessage(R.string.alert_message)
-        builder.setPositiveButton( // ja knop
+        // ja knop
+        builder.setPositiveButton(
             R.string.alert_positive,
             DialogInterface.OnClickListener { dialog, which ->
                 if (stemmingenLijst[position].selected) {
@@ -43,24 +40,30 @@ class OpgeslagenStemmingenFragment(
                 stemmingenLijst.removeAt(position)
                 adapter.notifyItemRemoved(position)
                 adapter.notifyItemRangeChanged(position, adapter.itemCount - position)
+                FileRepository(requireContext()).save(stemmingenLijst)
                 dialog.cancel()
             })
-        builder.setNegativeButton( // annuleer knop
+        // annuleer knop
+        builder.setNegativeButton(
             R.string.alert_negative,
             DialogInterface.OnClickListener { dialog, which ->
                 dialog.cancel()
             })
+        // toont pop-up
         builder.create()
         builder.show()
     }
 
     fun selectStemming(position: Int) {
-        if (selectedStemming >= 0) { // -1 is nog niks geselecteerd
+        // als er al een stemming is geselecteerd, -1 is nog niks geselecteerd
+        if (selectedStemming >= 0) {
             stemmingenLijst[selectedStemming].selected = false
             adapter.notifyItemChanged(selectedStemming)
         }
+        // selecteerd de stemming op position
         selectedStemming = position
         stemmingenLijst[position].selected = true
         adapter.notifyItemChanged(position)
+        FileRepository(requireContext()).save(stemmingenLijst)
     }
 }

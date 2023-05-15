@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.gitaarstemmer.databinding.FragmentMaakStemmingenBinding
 
-
 class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
 
 
@@ -19,11 +18,10 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
     private lateinit var snaren: Array<Spinner>
     private var geselecteerdeNoten = arrayOf(Noot.A, Noot.A, Noot.A, Noot.A, Noot.A, Noot.A)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMaakStemmingenBinding.inflate(layoutInflater)
 
+        // spinners voor de snaren in een array plaatsen
         snaren = arrayOf(
             binding.spinnerSnaar1,
             binding.spinnerSnaar2,
@@ -35,25 +33,18 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
 
         // spinners voor de snaren initializeren
         for (snaar in snaren) {
+            // https://developer.android.com/develop/ui/views/components/spinner
             // Create an ArrayAdapter
-            var arrayAdapter =
-                ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, Noot.values())
+            var arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, Noot.values())
             // Specify the layout to use when the list of choices appears
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             snaar.adapter = arrayAdapter
-
+            // als de user een noot selecteerd
             snaar.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parentView: AdapterView<*>?,
-                    selectedItemView: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    geselecteerdeNoten[snaren.indexOf(snaar)] =
-                        parentView?.getItemAtPosition(position) as Noot
+                override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                    geselecteerdeNoten[snaren.indexOf(snaar)] = parentView?.getItemAtPosition(position) as Noot
                 }
-
                 override fun onNothingSelected(parentView: AdapterView<*>?) {}
             })
         }
@@ -61,13 +52,10 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
         // knop
         binding.maakStemmingButton.setOnClickListener {
             if (binding.titelInput.getText().toString() == "") { // geen titel
-                Toast.makeText(
-                    context,
-                    R.string.geen_titel_waarschuwing,
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(context, R.string.geen_titel_waarschuwing, Toast.LENGTH_LONG).show()
 
-            } else {
+            }
+            else {
                 stemmingenLijst.add(
                     Stemming(
                         binding.titelInput.getText().toString(),
@@ -75,6 +63,7 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
                         geselecteerdeNoten.copyOf()
                     )
                 )
+                FileRepository(requireContext()).save(stemmingenLijst)
                 Toast.makeText(context, R.string.succesful_save, Toast.LENGTH_LONG).show()
             }
 

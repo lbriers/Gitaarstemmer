@@ -45,7 +45,7 @@ class StemmingAdapter(
             if (items[position].selected) {
                 this.setBackgroundColor(Color.LTGRAY)
             } else {
-                setBackgroundColor(Color.WHITE)
+                setBackgroundColor(Color.TRANSPARENT)
             }
 
         }

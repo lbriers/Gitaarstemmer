@@ -13,21 +13,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var menuBarToggle: ActionBarDrawerToggle
 
-    //stemmingenlijst
-    //TODO: vragen of dat public mag zijn
+    // filerepository
+    private lateinit var fileRepository: FileRepository
+
+    // stemmingenlijst
     private var selectedStemming: Int = -1 // -1 => niks geselecteerd
-    private var stemmingenLijst: ArrayList<Stemming> = arrayListOf<Stemming>(
-        Stemming(
-            "Standaard",
-            false,
-            arrayOf(Noot.E, Noot.A, Noot.D, Noot.G, Noot.B, Noot.E)
-        )
-    )
+    private var stemmingenLijst: ArrayList<Stemming> = arrayListOf<Stemming>()
+
 
     // fragments
     private var stemmerFragment = StemmerFragment()
-    private var opgeslagenStemmingenFragment =
-        OpgeslagenStemmingenFragment(stemmingenLijst, selectedStemming)
+    private var opgeslagenStemmingenFragment = OpgeslagenStemmingenFragment(stemmingenLijst, selectedStemming)
     private var maakStemmingenFragment = MaakStemmingenFragment(stemmingenLijst)
 
 
@@ -35,6 +31,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        // laad de stemmingen
+        stemmingenLijst.addAll(FileRepository(this).load())
+        for(item in stemmingenLijst){
+            if(item.selected){
+                selectedStemming = stemmingenLijst.indexOf(item)
+                break
+            }
+        }
+
+        // opent het eerste fragment
         supportFragmentManager.beginTransaction().apply {
             //kan niet met openFragment() door de terug knop
             replace(R.id.fragmentContainer, stemmerFragment)

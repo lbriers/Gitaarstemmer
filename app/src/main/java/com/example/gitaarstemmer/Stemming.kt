@@ -1,11 +1,6 @@
 package com.example.gitaarstemmer
 
-enum class Noot {
-    A, A_SHARP, B, C, C_SHARP, D, D_SHARP, E, F, F_SHARP, G, G_SHARP;
+import kotlinx.serialization.Serializable
 
-    override fun toString(): String {
-        return super.toString().replace("_SHARP", "#")
-    }
-}
-
+@Serializable
 class Stemming(val title: String, var selected: Boolean, val noten: Array<Noot>)

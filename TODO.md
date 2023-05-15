@@ -6,7 +6,7 @@
 # Minimum requirements
 
 - [X] At least three fragments or activities;
-- [ ] At least one data storage/request system;
+- [X] At least one data storage/request system;
 - [ ] At least one master/detail using a RecyclerView;
 - [ ] At least one Intent;
 - [x] At least one menu option;
