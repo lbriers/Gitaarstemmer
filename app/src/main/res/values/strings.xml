@@ -10,9 +10,10 @@
     <string name="alert_negative">Annuleer</string>
     <!-- Maak stemmingen fragment-->
     <string name="input_hint">Titel</string>
-    <string name="geen_titel_waarschuwing">Geef eerst een titel in</string>
+    <string name="no_title_warning">Geef eerst een titel in</string>
     <string name="succesful_save">Stemming is opgeslagen</string>
+    <string name="save_button">Opslaan</string>
     <!-- File repository-->
-    <string name="bestandsnaam">stemmingen.txt</string>
+    <string name="filename">stemmingen.txt</string>
 
 </resources>

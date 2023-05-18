@@ -20,6 +20,7 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMaakStemmingenBinding.inflate(layoutInflater)
+        var fileRepository = FileRepository(requireContext())
 
         // spinners voor de snaren in een array plaatsen
         snaren = arrayOf(
@@ -52,8 +53,7 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
         // knop
         binding.maakStemmingButton.setOnClickListener {
             if (binding.titelInput.getText().toString() == "") { // geen titel
-                Toast.makeText(context, R.string.geen_titel_waarschuwing, Toast.LENGTH_LONG).show()
-
+                Toast.makeText(context, R.string.no_title_warning, Toast.LENGTH_LONG).show()
             }
             else {
                 stemmingenLijst.add(
@@ -63,7 +63,7 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
                         geselecteerdeNoten.copyOf()
                     )
                 )
-                FileRepository(requireContext()).save(stemmingenLijst)
+                fileRepository.save(stemmingenLijst)
                 Toast.makeText(context, R.string.succesful_save, Toast.LENGTH_LONG).show()
             }
 

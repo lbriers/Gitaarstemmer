@@ -13,10 +13,9 @@ class FileRepository(val context: Context) {
 
     private val defaultList = listOf(Stemming("Standaard", false, arrayOf(Noot.E, Noot.A, Noot.D, Noot.G, Noot.B, Noot.E)))
 
-
     fun load(): List<Stemming> {
         try {
-            val openFileInput = context.openFileInput(context.getString(R.string.bestandsnaam)) ?: return defaultList
+            val openFileInput = context.openFileInput(context.getString(R.string.filename)) ?: return defaultList
             ObjectInputStream(openFileInput).use {
                 return Json.decodeFromString<List<Stemming>>(it.readObject() as String)
             }
@@ -29,7 +28,7 @@ class FileRepository(val context: Context) {
     }
 
     fun save(items: List<Stemming>) {
-        val openFileOutput = context.openFileOutput(context.getString(R.string.bestandsnaam), Context.MODE_PRIVATE) ?: return
+        val openFileOutput = context.openFileOutput(context.getString(R.string.filename), Context.MODE_PRIVATE) ?: return
         ObjectOutputStream(openFileOutput).use {
             it.writeObject(Json.encodeToString(items))
         }

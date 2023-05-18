@@ -14,9 +14,11 @@ class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var
 
     private lateinit var binding: FragmentOpgeslagenStemmingenBinding
     private lateinit var adapter: StemmingAdapter
+    private lateinit var fileRepository: FileRepository
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentOpgeslagenStemmingenBinding.inflate(layoutInflater)
+        fileRepository = FileRepository(requireContext())
 
         adapter = StemmingAdapter(stemmingenLijst, this)
         binding.recyclerView.adapter = adapter
@@ -40,7 +42,7 @@ class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var
                 stemmingenLijst.removeAt(position)
                 adapter.notifyItemRemoved(position)
                 adapter.notifyItemRangeChanged(position, adapter.itemCount - position)
-                FileRepository(requireContext()).save(stemmingenLijst)
+                fileRepository.save(stemmingenLijst)
                 dialog.cancel()
             })
         // annuleer knop
@@ -64,6 +66,6 @@ class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var
         selectedStemming = position
         stemmingenLijst[position].selected = true
         adapter.notifyItemChanged(position)
-        FileRepository(requireContext()).save(stemmingenLijst)
+        fileRepository.save(stemmingenLijst)
     }
 }

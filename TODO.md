@@ -7,7 +7,7 @@
 
 - [X] At least three fragments or activities;
 - [X] At least one data storage/request system;
-- [ ] At least one master/detail using a RecyclerView;
+- [X] At least one master/detail using a RecyclerView;
 - [ ] At least one Intent;
 - [x] At least one menu option;
 - [ ] At least one data signal to be used (GPS, Camera, accelerometer, …);
