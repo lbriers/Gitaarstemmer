@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.example.gitaarstemmer.databinding.FragmentStemmerBinding
 
 
-class StemmerFragment : Fragment() {
+class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>, var selectedStemming: Int) : Fragment() {
 
     private lateinit var binding: FragmentStemmerBinding
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -21,8 +21,9 @@ class StemmerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStemmerBinding.inflate(layoutInflater)
-
-
+        //var stemming = stemmingenLijst[selectedStemming]
+        //var noten = stemming.noten
+        //binding.snarenNotatie.text = noten.get(0).toString() + " - " + noten.get(1).toString() +  " - " + noten.get(2).toString() +  " - " + noten.get(3).toString() +  " - " + noten.get(4).toString() +  " - " + noten.get(5).toString()
 
         stemmerThread.start()
 

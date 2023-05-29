@@ -17,12 +17,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fileRepository: FileRepository
 
     // stemmingenlijst
-    private var selectedStemming: Int = -1 // -1 => niks geselecteerd
+    private var selectedStemming: Int = -1   // -1 => niks geselecteerd
     private var stemmingenLijst: ArrayList<Stemming> = arrayListOf<Stemming>()
 
-
     // fragments
-    private var stemmerFragment = StemmerFragment()
+    private var stemmerFragment = StemmerFragment(stemmingenLijst, selectedStemming)
     private var opgeslagenStemmingenFragment = OpgeslagenStemmingenFragment(stemmingenLijst, selectedStemming)
     private var maakStemmingenFragment = MaakStemmingenFragment(stemmingenLijst)
 
