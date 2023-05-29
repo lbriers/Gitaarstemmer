@@ -22,21 +22,24 @@ class StemmerFragment : Fragment() {
     ): View? {
         binding = FragmentStemmerBinding.inflate(layoutInflater)
 
-        //stemmerThread.start()
+
+
+        stemmerThread.start()
 
         return binding.root
     }
-    /*
+
     val stemmerThread = Thread {
         val noteFinder = NoteFinder()
         val noten = arrayOf("A", "A#" , "B", "C" , "C#", "D" , "D#", "E", "F" , "F#", "G" , "G#")
         while (true) {
-            frequency = noteFinder.getNote()
+            var frequency = noteFinder.getNote()
             mainHandler.post {
-                binding.noteTeller.text = noten[frequency[0]] + " " + frequency[1].toString()
+                binding.noteTeller.text = noten[frequency[0]]
+                binding.noteOffset.text = frequency[1].toString()
             }
             Thread.sleep(750)
         }
-    }*/
+    }
 
 }
