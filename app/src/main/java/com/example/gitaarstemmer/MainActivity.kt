@@ -13,16 +13,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var menuBarToggle: ActionBarDrawerToggle
 
-    // filerepository
-    private lateinit var fileRepository: FileRepository
-
     // stemmingenlijst
-    private var selectedStemming: Int = -1   // -1 => niks geselecteerd
     private var stemmingenLijst: ArrayList<Stemming> = arrayListOf<Stemming>()
 
     // fragments
-    private var stemmerFragment = StemmerFragment(stemmingenLijst, selectedStemming)
-    private var opgeslagenStemmingenFragment = OpgeslagenStemmingenFragment(stemmingenLijst, selectedStemming)
+    private var stemmerFragment = StemmerFragment(stemmingenLijst)
+    private var opgeslagenStemmingenFragment = OpgeslagenStemmingenFragment(stemmingenLijst)
     private var maakStemmingenFragment = MaakStemmingenFragment(stemmingenLijst)
 
 
@@ -32,12 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         // laad de stemmingen
         stemmingenLijst.addAll(FileRepository(this).load())
-        for(item in stemmingenLijst){
-            if(item.selected){
-                selectedStemming = stemmingenLijst.indexOf(item)
-                break
-            }
-        }
 
         // opent het eerste fragment
         supportFragmentManager.beginTransaction().apply {
@@ -69,7 +59,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuTuner -> openFragment(stemmerFragment)
                 R.id.menuOpgeslagen -> openFragment(opgeslagenStemmingenFragment)
                 R.id.menuAanmaken -> openFragment(maakStemmingenFragment)
-                // ...
             }
             binding.drawerLayout.closeDrawer(GravityCompat.START, true) // sluit het menu
             true

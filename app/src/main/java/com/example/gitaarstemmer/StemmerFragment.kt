@@ -11,7 +11,7 @@ import android.widget.Toast
 import com.example.gitaarstemmer.databinding.FragmentStemmerBinding
 
 
-class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>, var selectedStemming: Int) : Fragment() {
+class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
 
     private lateinit var binding: FragmentStemmerBinding
     private val mainHandler = Handler(Looper.getMainLooper())
@@ -21,18 +21,20 @@ class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>, var selectedStem
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStemmerBinding.inflate(layoutInflater)
-        //var stemming = stemmingenLijst[selectedStemming]
+
+        var stemming: Stemming? = stemmingenLijst.firstOrNull{ it.selected } // kan null zijn
+
         //var noten = stemming.noten
         //binding.snarenNotatie.text = noten.get(0).toString() + " - " + noten.get(1).toString() +  " - " + noten.get(2).toString() +  " - " + noten.get(3).toString() +  " - " + noten.get(4).toString() +  " - " + noten.get(5).toString()
 
-        stemmerThread.start()
+        // stemmerThread.start()
 
         return binding.root
     }
 
     val stemmerThread = Thread {
         val noteFinder = NoteFinder()
-        val noten = arrayOf("A", "A#" , "B", "C" , "C#", "D" , "D#", "E", "F" , "F#", "G" , "G#")
+        val noten = arrayOf("A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#")
         while (true) {
             var frequency = noteFinder.getNote()
             mainHandler.post {

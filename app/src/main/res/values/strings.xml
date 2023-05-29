@@ -15,4 +15,5 @@
     <string name="save_button">Opslaan</string>
     <!-- File repository-->
     <string name="filename">stemmingen.txt</string>
+    <string name="standard_title">Standaard</string>
 </resources>

@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gitaarstemmer.databinding.FragmentOpgeslagenStemmingenBinding
 
-class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var selectedStemming: Int) : Fragment() {
+class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
 
     private lateinit var binding: FragmentOpgeslagenStemmingenBinding
     private lateinit var adapter: StemmingAdapter
@@ -36,9 +36,6 @@ class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var
         builder.setPositiveButton(
             R.string.alert_positive,
             DialogInterface.OnClickListener { dialog, which ->
-                if (stemmingenLijst[position].selected) {
-                    selectedStemming = -1
-                }
                 stemmingenLijst.removeAt(position)
                 adapter.notifyItemRemoved(position)
                 adapter.notifyItemRangeChanged(position, adapter.itemCount - position)
@@ -57,13 +54,15 @@ class OpgeslagenStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>, var
     }
 
     fun selectStemming(position: Int) {
-        // als er al een stemming is geselecteerd, -1 is nog niks geselecteerd
-        if (selectedStemming >= 0) {
-            stemmingenLijst[selectedStemming].selected = false
-            adapter.notifyItemChanged(selectedStemming)
+        var i = 0
+        for(stemming in stemmingenLijst){
+            if(stemming.selected){
+                stemming.selected = false
+                adapter.notifyItemChanged(i)
+                break
+            }
+            i++
         }
-        // selecteerd de stemming op position
-        selectedStemming = position
         stemmingenLijst[position].selected = true
         adapter.notifyItemChanged(position)
         fileRepository.save(stemmingenLijst)
