@@ -24,10 +24,10 @@ class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
 
         var stemming: Stemming? = stemmingenLijst.firstOrNull{ it.selected } // kan null zijn
 
-        //var noten = stemming.noten
-        //binding.snarenNotatie.text = noten.get(0).toString() + " - " + noten.get(1).toString() +  " - " + noten.get(2).toString() +  " - " + noten.get(3).toString() +  " - " + noten.get(4).toString() +  " - " + noten.get(5).toString()
+        var noten = stemming?.noten
+        binding.snarenNotatie.text = noten?.get(0).toString() + " - " + noten?.get(1).toString() +  " - " + noten?.get(2).toString() +  " - " + noten?.get(3).toString() +  " - " + noten?.get(4).toString() +  " - " + noten?.get(5).toString()
 
-        // stemmerThread.start()
+        stemmerThread.start()
 
         return binding.root
     }
