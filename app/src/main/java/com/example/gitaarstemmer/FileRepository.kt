@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream
 
 class FileRepository(val context: Context) {
 
-    private val defaultList = listOf(Stemming(context.getString(R.string.standard_title), false, arrayOf(Noot.E, Noot.A, Noot.D, Noot.G, Noot.B, Noot.E)))
+    private val defaultList = listOf(Stemming(context.getString(R.string.standard_title), true, arrayOf(Noot.E, Noot.A, Noot.D, Noot.G, Noot.B, Noot.E)))
 
     fun load(): List<Stemming> {
         try {

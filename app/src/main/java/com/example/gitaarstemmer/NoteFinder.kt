@@ -1,5 +1,6 @@
 package com.example.gitaarstemmer
 
+import android.annotation.SuppressLint
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
@@ -16,6 +17,7 @@ class NoteFinder {
     val noten = arrayOf(110,117,123,131,139,147,156,165,175,185,196,208)
     //A, A# , B, C , C#, D , D#, E , F , F#, G , G#
 
+    @SuppressLint("MissingPermission")
     val audioRecord = AudioRecord(
         MediaRecorder.AudioSource.MIC,
         sampleRate,
