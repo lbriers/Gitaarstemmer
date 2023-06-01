@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     private var opgeslagenStemmingenFragment = OpgeslagenStemmingenFragment(stemmingenLijst)
     private var maakStemmingenFragment = MaakStemmingenFragment(stemmingenLijst)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

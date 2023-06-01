@@ -13,10 +13,9 @@ import com.example.gitaarstemmer.databinding.FragmentMaakStemmingenBinding
 
 class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
 
-
     private lateinit var binding: FragmentMaakStemmingenBinding
     private lateinit var snaren: Array<Spinner>
-    private var geselecteerdeNoten = arrayOf(Noot.A, Noot.A, Noot.A, Noot.A, Noot.A, Noot.A)
+    private var geselecteerdeNoten = arrayOf(Noot.E, Noot.A, Noot.D, Noot.G, Noot.B, Noot.E)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMaakStemmingenBinding.inflate(layoutInflater)
@@ -33,18 +32,20 @@ class MaakStemmingenFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragmen
         )
 
         // spinners voor de snaren initializeren
-        for (snaar in snaren) {
+        for (i in 0..5) {
             // https://developer.android.com/develop/ui/views/components/spinner
             // Create an ArrayAdapter
             var arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, Noot.values())
             // Specify the layout to use when the list of choices appears
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            snaar.adapter = arrayAdapter
+            snaren[i].adapter = arrayAdapter
+            // verandert de standaard waarde van de spinner
+            snaren[i].setSelection(geselecteerdeNoten[i].ordinal)
             // als de user een noot selecteerd
-            snaar.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            snaren[i].setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
-                    geselecteerdeNoten[snaren.indexOf(snaar)] = parentView?.getItemAtPosition(position) as Noot
+                    geselecteerdeNoten[snaren.indexOf(snaren[i])] = parentView?.getItemAtPosition(position) as Noot
                 }
                 override fun onNothingSelected(parentView: AdapterView<*>?) {}
             })

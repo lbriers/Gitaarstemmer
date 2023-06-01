@@ -1,5 +1,6 @@
 package com.example.gitaarstemmer
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -76,8 +77,7 @@ class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
                 var frequency = noteFinder.getNote()
                 if (stemming != null && hoeveelsteNoot < 6) {
                     if (noten[frequency[0]] == stemming.noten[hoeveelsteNoot].toString() && frequency[1] == 0) {
-                        tel++
-                        if (tel == 3) {
+                        if (tel++ == 2) {
                             tel = 0
                             hoeveelsteNoot++
                         }
@@ -89,6 +89,11 @@ class StemmerFragment(var stemmingenLijst: ArrayList<Stemming>) : Fragment() {
                 mainHandler.post {
                     if (stemming != null) {
                         binding.snarenNotatie.text = snarenNotatieText(stemming, hoeveelsteNoot);
+                    }
+                    if (frequency[1] == 0) {
+                        binding.background.setBackgroundColor(Color.GREEN)
+                    } else {
+                        binding.background.setBackgroundColor(Color.TRANSPARENT)
                     }
                     binding.noteTeller.text = noten[frequency[0]]
                     binding.noteOffset.text = frequency[1].toString()
