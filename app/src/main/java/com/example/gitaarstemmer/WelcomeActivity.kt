@@ -41,7 +41,6 @@ class WelcomeActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 1) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission is granted, perform your task here
                 startActivity(intent)
             }
         }

@@ -7,6 +7,10 @@ import android.media.MediaRecorder
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
+/**************************************************
+ * based on the YIN algorithm
+ * http://audition.ens.fr/adc/pdf/2002_JASA_YIN.pdf
+ */
 class NoteFinder {
     val sampleRate = 22050
     val channelConfig = AudioFormat.CHANNEL_IN_MONO
